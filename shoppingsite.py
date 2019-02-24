@@ -225,6 +225,45 @@ def clear_cart():
     return redirect("/melons")
 
 
+@app.route("/remove_from_cart/<melon_id>")
+def remove_from_cart(melon_id):
+    """Add a melon to cart and redirect to shopping cart page.
+
+    When a melon is added to the cart, redirect browser to the shopping cart
+    page and display a confirmation message: 'Melon successfully added to
+    cart'."""
+
+    # TODO: Finish shopping cart functionality
+
+    # The logic here should be something like:
+    #
+    # - check if a "cart" exists in the session, and create one (an empty
+    #   dictionary keyed to the string "cart") if not
+    # - check if the desired melon id is the cart, and if not, put it in
+    # - increment the count for that melon id by 1
+    # - flash a success message
+    # - redirect the user to the cart page
+
+    if 'cart' not in session: 
+        flash("Your cart is empty.")
+        return redirect("/melons")
+    else: 
+        if session['cart'][melon_id] <= 0: 
+            del(session['cart'][melon_id])
+        else: 
+            session['cart'][melon_id] = session['cart'][melon_id] - 1
+
+    # if 'cart' not in session: 
+    #     session['cart'] = {}
+
+    # session['cart'][melon_id] = session['cart'].get(melon_id, 0) + 1
+
+    print("session cart details: {}".format(session['cart']))
+    print("session:{}".format(session))
+
+    flash('Removed from cart!')
+
+    return redirect('/cart')
 
 
 if __name__ == "__main__":
