@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Melon Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <!-- {% if list_of_melons %} -->
+            {% for melon in list_of_melons %}
+        <tr>
+
+            <td>{{ melon.common_name }}</td>
+            <td>{{ melon.quantity }}</td>
+            <td>{{ "${:.2f}".format(melon.price) }}</td>
+            <td>{{ "${:.2f}".format(melon.total_price) }}</td>
+            <td>
+                <a href="/add_to_cart/{{ melon.melon_id }}" class="btn btn-small btn-primary">+</a> 
+            </td>
+        </tr>
+        {% endfor %}
+        <!-- {% endif %} -->
+        </tbody>
+    </table>
+
+    <h3>Total: {{ "${:.2f}".format(total_price) }}</h3>
+    
+    <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+    <a href="/clear_cart" class="btn btn-large btn-primary">Clear Cart</a>
+
+{% endblock %}
